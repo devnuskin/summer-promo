@@ -3621,3 +3621,28 @@ div#logo .desktopLogo {
 #mainWrapper {
     overflow: visible !important;
 }
+/* Fix for "Add to Cart Button missing" AEM-11593 */
+@media screen and (max-width:1024px) and (min-width:768px){
+    #main-view .products-details .quick-buy-wrapper {
+        display: inline-block;
+        width:45%;
+    }
+
+    #main-view .products-details button.add-to-cart {
+        display: inline-block;
+        width: 45%;
+    }
+    #main-view .products-details button.quick-buy {
+        width: 100%;
+        }
+
+    #main-view #products.products-details .product-action .first-row {
+        margin-bottom: 10px;
+    }
+
+    #main-view #products.products-details .quantity {
+        margin-bottom: 0;
+        margin-top: 10px;
+    }
+}
+/* End of FIX AEM-11593 */
