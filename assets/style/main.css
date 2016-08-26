@@ -1289,9 +1289,11 @@ body {
     font-weight: bold;
     pointer-events: none;
 }
-.module-2 #products .product .soldout-label{
+/*
+.module-3 #products .product .soldout-label{
     color: #bb4800;    
 }
+*/
 .product .presale-infos {
     position: absolute;
     z-index: 10;
@@ -2003,7 +2005,7 @@ body {
     background-color: #008ab0;
 }
 
-.module-2 #products .product-menu .ritual-link {
+.module-3 #products .product-menu .ritual-link {
     background-color: #ffb40c;
 }
 
@@ -2574,8 +2576,8 @@ body {
 }
 
 
-.module-2 #products .product-price .price.discount,
-.module-2 #products .product-psv .psv{
+.module-3 #products .product-price .price.discount,
+.module-3 #products .product-psv .psv{
     background-color: #FFB403;
     
 }
