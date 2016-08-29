@@ -23,8 +23,7 @@ angular
 	])
     .config(function ($stateProvider, $urlRouterProvider, DEFAULT_URL_PAGE,
         localStorageServiceProvider, $httpProvider) {
-
-
+        
         // Routing 
         $stateProvider
             .state('app', {
@@ -86,16 +85,26 @@ angular
                 },
             });
 
-        //default redirect to welcome page
-        $urlRouterProvider.otherwise(DEFAULT_URL_PAGE);
+    
+        if(nuskin.summerPromo.ended){
+            $urlRouterProvider.otherwise(function ($injector) {
+                var $state = $injector.get('$state');
+                $state.go('app.shop', {'showCase': 'normal'});
+            });
+        }else{
+            //default redirect to welcome page
+            $urlRouterProvider.otherwise(DEFAULT_URL_PAGE);
+        }
 
         //register interceptors
         $httpProvider.interceptors.push('spinnerInterceptor');
-
+    
         //remove default prefix
         localStorageServiceProvider.setPrefix('');
     })
-    .run(function ($rootScope, $location, $state, $timeout, ROUTING_TIMEOUT, $anchorScroll) {
+    .run(function ($rootScope, $location, $state, $timeout, ROUTING_TIMEOUT, $anchorScroll, EVENT_NAMES) {
+    
+    
         $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState) {
 
             $anchorScroll(0);
@@ -220,6 +229,7 @@ function MainCtrl($state, categoryService, $window, $stateParams,
     }
     mainVm.ROUTING_SHOP_STATE = ROUTING_SHOP_STATE;
     mainVm.$state = $state;
+    mainVm.ended = nuskin.summerPromo.ended;
     mainVm.$stateParams = $stateParams;
     mainVm.productActive = $stateParams.productId;
     mainVm.categoryActive = $stateParams.categoryId;
@@ -864,19 +874,29 @@ function productService($http, identityService, productModel,
 
 
     api.initAllProducts = function () {
-
+        
         var allProducts = [];
         var products = _.chain(nuskin.summerPromo.categories.items)
             .pluck('products')
             .flatten(true)
             .value();
+        
+            
 
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
             product.menuOpened = false;
-            allProducts.push(
-                api.getProduct(product.sku, product.isOutOfStock, product.isInPresales)
-            )
+            
+            if(nuskin.summerPromo.ended){
+
+                allProducts.push(
+                    productModel.convertTo(product.sku, false, false, null, null, null, false, false, null)
+                )
+            }else{
+                allProducts.push(
+                    api.getProduct(product.sku, product.isOutOfStock, product.isInPresales)
+                )
+            }
         }
         return $q.all(allProducts).then(function (data) {
             productsCache = data;
