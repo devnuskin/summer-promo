@@ -3724,10 +3724,34 @@ div#logo .desktopLogo {
 @media screen and (max-width:850px){
     #ending .winter{
         background: none;
-        padding: 0;
-        color: #000;
+        padding: 0 20px 20px;
         height: auto;
+        position: relative;
     }
+    #ending .winter:before{
+        content: "";
+        background: url(/content/dam/eu-images/summerpromo2016/bulle-winter.png) center center no-repeat;
+        background-size: contain;
+        display: block;
+        width: 100%;
+        max-width:  246px;
+        height: 246px;
+        margin: 0 auto;
+    }
+    
+    #ending .winter:after{
+        content: "";
+        background: url(/content/dam/eu-images/summerpromo2016/winter-paint.png) top center no-repeat;
+        background-size: 100% 100%;
+        z-index: -1;
+        width: 100%;
+        position: absolute;
+        top: 226px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    
 
     #ending h2{
         font-size: 30px;
