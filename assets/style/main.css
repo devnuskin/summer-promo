@@ -3668,7 +3668,8 @@ div#logo .desktopLogo {
     text-align: center;
     color: #000;   
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        max-height: 100vh;
+        max-height: 80vh;
+        margin-top: 20px;
         overflow: auto;
 }
 #ending strong{
@@ -3724,6 +3725,7 @@ div#logo .desktopLogo {
     display: none;
 }
 @media screen and (max-width:850px){
+    
     #ending .winter{
         background: none;
         padding: 0 20px 20px;
