@@ -3659,7 +3659,7 @@ div#logo .desktopLogo {
     left: 50%;
     transform: translate(-50%,-50%);
     background-color: #fff;
-    z-index: 500;
+    z-index: 148;
     display: none;
     padding: 70px 0;
     max-width:  925px;
