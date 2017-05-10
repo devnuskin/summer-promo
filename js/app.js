@@ -23,8 +23,8 @@ angular
 	])
     .config(function ($stateProvider, $urlRouterProvider, DEFAULT_URL_PAGE,
         localStorageServiceProvider, $httpProvider) {
-        
-        // Routing 
+
+        // Routing
         $stateProvider
             .state('app', {
                 abstract: true,
@@ -85,7 +85,7 @@ angular
                 },
             });
 
-    
+
         if(nuskin.summerPromo.ended){
             $urlRouterProvider.otherwise(function ($injector) {
                 var $state = $injector.get('$state');
@@ -98,13 +98,13 @@ angular
 
         //register interceptors
         $httpProvider.interceptors.push('spinnerInterceptor');
-    
+
         //remove default prefix
         localStorageServiceProvider.setPrefix('');
     })
     .run(function ($rootScope, $location, $state, $timeout, ROUTING_TIMEOUT, $anchorScroll, EVENT_NAMES) {
-    
-    
+
+
         $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState) {
 
             $anchorScroll(0);
@@ -874,19 +874,19 @@ function productService($http, identityService, productModel,
 
 
     api.initAllProducts = function () {
-        
+
         var allProducts = [];
         var products = _.chain(nuskin.summerPromo.categories.items)
             .pluck('products')
             .flatten(true)
             .value();
-        
-            
+
+
 
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
             product.menuOpened = false;
-            
+
             if(nuskin.summerPromo.ended){
 
                 allProducts.push(
@@ -1351,7 +1351,6 @@ function dynamicDirective($compile) {
 angular
 	.module('common.directives')
 	.directive("dynamic", dynamicDirective);
-
 function spinnerDirective(EVENT_NAMES) {
     return function ($scope, element) {
         $scope.$on(EVENT_NAMES.loader_show, function () {
@@ -1370,6 +1369,61 @@ function spinnerDirective(EVENT_NAMES) {
 angular
     .module('common.directives')
     .directive("spinnerLoader", spinnerDirective);
+function dsSelectorDirective() {
+	var template = 	  ' <div class="ds-wrapper" tabindex="1" ng-class="{\'active\': dsActive}">'
+					+ '		<input class="ds-input"'
+					+ '			type="number"'
+					+ '			ng-click="dsActive = false"'
+					+ '			ng-focus="onTextFocus($event)"'
+					+ '			ng-model="selectedOption"'
+					+ '			ng-pattern="onlyNumbers"'
+					+ '			onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"/>'
+					+ '		<div class="ds-dropdown" ng-click="dsActive = !dsActive">'
+					+ '			<span class="ds-arrow-icon">'
+					+ '				<svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">'
+					+ '					<path d="M0 3l1-1l6 6l6-6l1 1l-7 7z"/>'
+					+ '				</svg>'
+					+ '			</span>'
+					+ '		</div>'
+					+ '		<ul class="ds-list" tabindex="1" ng-click="dsActive = false">'
+					+ '			<li ng-repeat="option in options" ng-click="select(option)">'
+					+ '				<span href="#">{{option}}</span>'
+					+ '			</li>'
+					+ '		</ul>'
+					+ '	</div>';
+
+	return {
+		restrict: 'E',
+		scope: {
+			options: '=',
+			selectedOption: '='
+		},
+		template: template,
+		link: link
+	};
+
+	function link(scope, element, attr, ngModelCtrl) {
+		scope.dsActive = false; // dropdown list visibility
+		scope.onlyNumbers = /^(0*)?[1-9]+[0-9]*$/;
+		scope.select = function(opt) {
+			scope.selectedOption = opt;
+		};
+		scope.onTextFocus = function($event) {
+			$event.target.select();
+		};
+		$(document).bind('click', function(evnt) {
+			// if target is outside directive, close dropdown
+			if (element.find(evnt.target).length <= 0) {
+				scope.dsActive = false;
+				scope.$apply();
+			}
+		});
+	}
+}
+
+angular
+	.module('common.directives')
+	.directive("dsSelector", dsSelectorDirective);
 function customCurrency(currencyService) {
 	return function(input) {
 		return currencyService.currencyFormat(input);

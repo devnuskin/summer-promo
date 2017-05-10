@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/fonts/dearjoe/stylesheet.css">
     <link rel="stylesheet" href="assets/fonts/libby/stylesheet.css">
     <link rel="stylesheet" href="assets/style/perfect-scrollbar.css">
+	<link rel="stylesheet" href="assets/style/ds-selector.css">
     <link rel="stylesheet" href="assets/style/main.css">
 
 
@@ -276,15 +277,15 @@
 
 
                     <div id="summer-app-body" ng-controller="mainController as mainVm" class="{{bodylayout}} module-1" ng-class="{'cart-open' : mainVm.cartSrv.showCart, 'ended' : mainVm.ended }">
-                       
+
                        <!-- ending popup -->
                        <div id="ending">
-                           <h2 ng-bind-html="$root.translations.common.endingTitle"></h2>     
-                          <div class="winter" ng-bind-html="$root.translations.common.endingWinter"></div>  
-                          <div class="footer-note" ng-bind-html="$root.translations.common.endingFooter"></div>                    
+                           <h2 ng-bind-html="$root.translations.common.endingTitle"></h2>
+                          <div class="winter" ng-bind-html="$root.translations.common.endingWinter"></div>
+                          <div class="footer-note" ng-bind-html="$root.translations.common.endingFooter"></div>
                        </div>
-                       
-                       
+
+
                         <!-- SPINNER -->
                         <div id="spinner" spinner-loader>
                             <div class="ajax-loader">
