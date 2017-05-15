@@ -1,30 +1,30 @@
 angular
     .module('coreApp', [
-		'ui.router',
-		'templates-app',
+        'ui.router',
+        'templates-app',
         '720kb.socialshare',
         //'slick',
-		'ngSanitize',
+        'ngSanitize',
         'perfect_scrollbar',
-		//'ngAnimate',
-		'LocalStorageModule',
-		'common.config',
-		'common.models',
-		'common.services',
-		'common.interceptors',
-		'common.directives',
-		'common.filters',
-		'module.main',
-		'module.products',
-		'module.shoppingCart',
-		'module.product',
-		'module.category',
-		'module.faq'
-	])
+        //'ngAnimate',
+        'LocalStorageModule',
+        'common.config',
+        'common.models',
+        'common.services',
+        'common.interceptors',
+        'common.directives',
+        'common.filters',
+        'module.main',
+        'module.products',
+        'module.shoppingCart',
+        'module.product',
+        'module.category',
+        'module.faq'
+    ])
     .config(function ($stateProvider, $urlRouterProvider, DEFAULT_URL_PAGE,
         localStorageServiceProvider, $httpProvider) {
 
-        // Routing
+        // Routing 
         $stateProvider
             .state('app', {
                 abstract: true,
@@ -86,12 +86,14 @@ angular
             });
 
 
-        if(nuskin.summerPromo.ended){
+        if (nuskin.summerPromo.ended) {
             $urlRouterProvider.otherwise(function ($injector) {
                 var $state = $injector.get('$state');
-                $state.go('app.shop', {'showCase': 'normal'});
+                $state.go('app.shop', {
+                    'showCase': 'normal'
+                });
             });
-        }else{
+        } else {
             //default redirect to welcome page
             $urlRouterProvider.otherwise(DEFAULT_URL_PAGE);
         }
@@ -123,7 +125,8 @@ angular
             */
         });
     })
-	.run(function(categoryService, productService) {
+    .run(function (categoryService, productService) {
+        /*
         var baseUrl = '#/shop/normal';
 
         // Find and prepare hamburger nav menu
@@ -134,12 +137,12 @@ angular
         // add categories and products to nav menu
         var categories = categoryService.getNormalCategories();
         var products = productService.getNormalProducts();
-        categories.forEach(function(cat) {
+        categories.forEach(function (cat) {
             window.leftSideNav.addTopLevelNavItem(cat.title);
             window.leftSideNav.addSubLevel(cat.title, baseUrl + '/category/' + cat.key);
-            products.forEach(function(prod) {
+            products.forEach(function (prod) {
                 if (prod.categoryId === cat.key) {
-					var url = baseUrl + '/category/' + cat.key + '/product/' + prod.sku;
+                    var url = baseUrl + '/category/' + cat.key + '/product/' + prod.sku;
                     window.leftSideNav.addSubLevelList(prod.name, url);
                 }
             });
@@ -147,8 +150,9 @@ angular
 
         // Force close navbar on selection of menu item
         // (reason: navbar normally closes on page load;
-		// Angular state links do not cause page load)
+        // Angular state links do not cause page load)
         $leftNavbar.find('.subLevelNav').click(window.leftSideNav.triggerLeftSideNav);
+        */
     });
 angular.module('common.directives', []);
 angular.module('common.filters', []);
@@ -174,6 +178,7 @@ function categoryController(categoryService, productService, $stateParams, shopp
         });
     }
 
+    categoryVm.cartSrv = shoppingCartService;
     categoryVm.closeMenus = function (product) {
         categoryVm.products.forEach(function (el, index) {
             if (el !== product) el.menuOpened = false;
@@ -262,11 +267,17 @@ function MainCtrl($state, categoryService, $window, $stateParams,
     mainVm.categoryActive = $stateParams.categoryId;
     mainVm.cartSrv = shoppingCartService;
     mainVm.canBuyPromoProducts = shoppingCartService.canBuyPromoProducts();
+    mainVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();
     mainVm.cartErrorMessage = shoppingCartService.getErrorFromCheckout();
     mainVm.productService = productService;
     mainVm.closePromoInformationPopup = function () {
         //identityService.closePromoInformationPopup();
         mainVm.hasClosedPromoInformationPopup = true; //identityService.hasClosedPromoInformationPopup();
+    }
+    mainVm.openPromoInformationPopup = function () {
+        //identityService.closePromoInformationPopup();
+        console.log('ok');
+        mainVm.hasClosedPromoInformationPopup = false; //identityService.hasClosedPromoInformationPopup();
     }
     mainVm.hasClosedPromoInformationPopup = false; //identityService.hasClosedPromoInformationPopup();
     // n means new, o means old (new is a reserved word for javascript => execution error)
@@ -322,6 +333,8 @@ function MainCtrl($state, categoryService, $window, $stateParams,
     $rootScope.$on(EVENT_NAMES.shoppingCartUpdated, function () {
         //redirectIfNoAccess();
         mainVm.canBuyPromoProducts = shoppingCartService.canBuyPromoProducts();
+        mainVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();
+        
     });
 
     return mainVm;
@@ -459,6 +472,9 @@ function navigationCartController(shoppingCartService, $rootScope, EVENT_NAMES, 
             scrollLeft: currentScrollIndex * 100
         }, 750);
     }
+    navigationCartVm.shoppingCartUpdated = function () {
+        $rootScope.$broadcast(EVENT_NAMES.shoppingCartUpdated);
+    }
 
     return navigationCartVm;
 };
@@ -466,10 +482,18 @@ function navigationCartController(shoppingCartService, $rootScope, EVENT_NAMES, 
 angular
     .module('module.shoppingCart')
     .controller('navigationCartController', navigationCartController)
+    .directive('navigationCartRepeatDirective', function () {
+        return function (scope, element, attrs) {
+    
+        };
+    })
 function productController(productService, $stateParams, shoppingCartService, $state) {
 
     var productVm = {
-        products: []
+        products: [],
+        shoppingCartService: shoppingCartService,
+        showUsage: false,
+        showIngredients: false,
     };
     productVm.closeMenus = function (product) {
         productVm.products.forEach(function (el, index) {
@@ -500,9 +524,12 @@ function productController(productService, $stateParams, shoppingCartService, $s
         productVm.showLongDecription = !productVm.showLongDecription;
     }
 
-    setTimeout(function () {
-        $('.product-description').perfectScrollbar('update');
-    }, 0)
+    productVm.toggleUsage = function () {
+        productVm.showUsage = !productVm.showUsage;
+    }
+    productVm.toggleIngredients = function () {
+        productVm.showIngredients = !productVm.showIngredients;
+    }
 
     return productVm;
 };
@@ -524,18 +551,23 @@ angular
 
         };
     })
-function productsController(productService, $stateParams, ROUTING_SHOP_STATE, $state, shoppingCartService) {
+function productsController($scope, productService, $stateParams, ROUTING_SHOP_STATE, $state, shoppingCartService, categoryService) {
     var productsVm = {
         products: [],
+        categories: [],
         activeCategory: '',
     }
 
     var _tempProducts;
     if ($stateParams.showCase == ROUTING_SHOP_STATE.promo) {
         productsVm.products = productService.getPromoProducts();
+        productsVm.categories = categoryService.getPromoCategories();
     } else {
         productsVm.products = productService.getNormalProducts();
+        productsVm.categories = categoryService.getNormalCategories();
     }
+
+    //
 
     productsVm.cartSrv = shoppingCartService;
 
@@ -561,10 +593,45 @@ function productsController(productService, $stateParams, ROUTING_SHOP_STATE, $s
         });
     }
 
+    productsVm.goToCategory = function (category) {
+        //productsVm.products = [];
+        product = productService.getProductForCategory(category)[0];
+        $state.go('app.shop.category.product', {
+            productId: product.sku,
+            categoryId: product.categoryId
+        });
+    }
+
     productsVm.setActiveCategory = function (category) {
         productsVm.activeCategory = category;
     }
 
+    $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+        //check if the browser width is less than or equal to the large dimension of an iPad
+        if ($(window).width() <= 767) {
+            var $products = $('#products'),
+            slickOptions = {
+                centerMode: true,
+                centerPadding: "80px",
+                slidesToShow: 1,
+                infinite: false,
+                slide: '.product',
+                //variableWidth: true,
+            };
+            /*
+            $products.find('.product-category1').wrapAll('<div class="slide-category slide-category1"/>');
+            $products.find('.product-category2').wrapAll('<div class="slide-category slide-category2"/>');
+            $products.find('.product-category3').wrapAll('<div class="slide-category slide-category3"/>');
+            */
+            
+            $products.find('.slide-category1').slick(slickOptions);
+            $products.find('.slide-category2').slick(slickOptions);
+            $products.find('.slide-category3').slick(slickOptions);
+            
+            
+        }
+        
+    });
 
     return productsVm;
 };
@@ -572,8 +639,22 @@ function productsController(productService, $stateParams, ROUTING_SHOP_STATE, $s
 angular
     .module('module.products')
     .controller('productsController', productsController)
+    .directive('onFinishRender', function ($timeout) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attr) {
+                if (scope.$last === true) {
+                    $timeout(function () {
+                        scope.$emit(attr.onFinishRender);
+                    });
+                }
+            }
+        }
+    })
     .directive('productsRepeatDirective', function () {
+        
         return function (scope, element, attrs) {
+            
             if (scope.$index < 4 || scope.$index == 5) {
                 TweenMax.fromTo(element, 0.5, {
                     opacity: 0,
@@ -622,20 +703,32 @@ function shoppingCartController(shoppingCartService, $rootScope,
     shoppingCartVm.toggleMobileMenu = function () {
         $('#summer-app-body').toggleClass('mobile-menu-display');
     }
+    shoppingCartVm.shoppingCartUpdated = function () {
+        $rootScope.$broadcast(EVENT_NAMES.shoppingCartUpdated);
+    }
     initVm();
 
     $rootScope.$on(EVENT_NAMES.shoppingCartUpdated, function () {
         initVm();
-        shoppingCartVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();
+        shoppingCartVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();     
     });
     shoppingCartVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();
+
+
+    
+
 
     return shoppingCartVm;
 };
 
 angular
     .module('module.shoppingCart')
-    .controller('shoppingCartController', shoppingCartController);
+    .controller('shoppingCartController', shoppingCartController)
+    .directive('shoppingCartRepeatDirective', function () {
+        return function (scope, element, attrs) {
+
+        };
+    })
 function categoryService(categoryModel, PROMO_PRODUCTS_KEY) {
     var api = {};
 
@@ -644,7 +737,9 @@ function categoryService(categoryModel, PROMO_PRODUCTS_KEY) {
             category.key,
             category.name,
             category.title,
-            category.description);
+            category.description,
+            category.video
+            );
     }
 
     function formatCategories(list) {
@@ -901,19 +996,19 @@ function productService($http, identityService, productModel,
 
 
     api.initAllProducts = function () {
-
+        
         var allProducts = [];
         var products = _.chain(nuskin.summerPromo.categories.items)
             .pluck('products')
             .flatten(true)
             .value();
-
-
+        
+            
 
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
             product.menuOpened = false;
-
+            
             if(nuskin.summerPromo.ended){
 
                 allProducts.push(
@@ -945,6 +1040,8 @@ function productService($http, identityService, productModel,
                 category ? category.key : null,
                 rawData.contents.language[0].shortDescription,
                 rawData.contents.language[0].longDescription,
+                rawData.contents.language[0].usage,
+                rawData.contents.language[0].ingredients,
                 rawData.contents.language[0].name, {
                     fullPrice: userType == USER_TYPES.CUSTOMERS || userType == USER_TYPES.NOT_LOGGED_IN ? rawData.market.Retail : rawData.market.Wholesale,
                     priceReduced: userType == USER_TYPES.CUSTOMERS || userType == USER_TYPES.NOT_LOGGED_IN ? rawData.market.WebRetail : rawData.market.WebWholesale,
@@ -1076,6 +1173,20 @@ function ShoppingCartService($rootScope, identityService, EVENT_NAMES, localStor
 
     api.hasProducts = function () {
         return cart.products && cart.products.length > 0;
+    };
+
+    api.hasProduct = function (product) {
+        console.log('ok');
+         if(cart.products && cart.products.length > 0){
+            var productCart = _.find(cart.products, function (p) {
+                return p.sku == product.sku;
+            });
+            if (productCart) {
+                return true;
+            }
+         }
+
+         return false;
     };
 
     api.addProduct = function (product) {
@@ -1217,19 +1328,20 @@ angular
 function categoryModel(IMAGES_URL) {
     var api = {};
 
-    function Category(key, name, title, description) {
+    function Category(key, name, title, description, video) {
         var category = {
             key: key,
             name: name,
             title: title,
+            video: video,
             description: description
         }
 
         return category;
     }
 
-    api.convertTo = function (key, name, title, description) {
-        return new Category(key, name, title, description)
+    api.convertTo = function (key, name, title, description, video) {
+        return new Category(key, name, title, description, video)
     }
 
     return api;
@@ -1241,7 +1353,7 @@ angular
 function productModel(IMAGES_URL, PROMO_PRODUCTS_KEY) {
     var api = {};
 
-    function Product(sku, categoryId, shortDescription, longDescription, name, priceData, isOutOfStock, isInPresales, fullImage) {
+    function Product(sku, categoryId, shortDescription, longDescription, usage, ingredients, name, priceData, isOutOfStock, isInPresales, fullImage) {
 
         var imagePathArray = fullImage.split('/');
 
@@ -1268,6 +1380,8 @@ function productModel(IMAGES_URL, PROMO_PRODUCTS_KEY) {
             //urlImage: fullImagePath,
             shortDescription: shortDescription,
             longDescription: longDescription,
+            usage: usage,
+            ingredients: ingredients,
             name: name,
             price: null,
             priceReduced: null,
@@ -1315,8 +1429,8 @@ function productModel(IMAGES_URL, PROMO_PRODUCTS_KEY) {
     }
 
 
-    api.convertTo = function (sku, categoryId, shortDescription, longDescription, name, price, isOutOfStock, isInPresales, fullImage) {
-        return new Product(sku, categoryId, shortDescription, longDescription, name, price, isOutOfStock, isInPresales, fullImage)
+    api.convertTo = function (sku, categoryId, shortDescription, longDescription, usage, ingredients, name, price, isOutOfStock, isInPresales, fullImage) {
+        return new Product(sku, categoryId, shortDescription, longDescription, usage, ingredients, name, price, isOutOfStock, isInPresales, fullImage)
     }
 
     return api;
@@ -1362,40 +1476,6 @@ function spinnerInterceptor($rootScope, $q, EVENT_NAMES) {
 angular
 	.module('common.interceptors')
 	.factory('spinnerInterceptor', spinnerInterceptor);
-function dynamicDirective($compile) {
-	return {
-		restrict: 'A',
-		replace: true,
-		link: function(scope, ele, attrs) {
-			scope.$watch(attrs.dynamic, function(html) {
-				ele.html(html);
-				$compile(ele.contents())(scope);
-			});
-		}
-	};
-}
-
-angular
-	.module('common.directives')
-	.directive("dynamic", dynamicDirective);
-function spinnerDirective(EVENT_NAMES) {
-    return function ($scope, element) {
-        $scope.$on(EVENT_NAMES.loader_show, function () {
-            element[0].style.display = "inline";
-            return element;
-        });
-        return $scope.$on(EVENT_NAMES.loader_hide, function () {
-            TweenMax.to(element, 1, {
-                autoAlpha: 0,
-            });
-            return element;
-        });
-    };
-}
-
-angular
-    .module('common.directives')
-    .directive("spinnerLoader", spinnerDirective);
 function dsSelectorDirective() {
 	var template = 	  ' <div class="ds-wrapper" tabindex="1" ng-class="{\'active\': dsActive}">'
 					+ '		<input class="ds-input"'
@@ -1451,6 +1531,107 @@ function dsSelectorDirective() {
 angular
 	.module('common.directives')
 	.directive("dsSelector", dsSelectorDirective);
+function dynamicDirective($compile) {
+	return {
+		restrict: 'A',
+		replace: true,
+		link: function(scope, ele, attrs) {
+			scope.$watch(attrs.dynamic, function(html) {
+				ele.html(html);
+				$compile(ele.contents())(scope);
+			});
+		}
+	};
+}
+
+angular
+	.module('common.directives')
+	.directive("dynamic", dynamicDirective);
+
+angular
+    .module('common.directives')
+    .directive('integer', function () {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ngModel) {
+                ngModel.$parsers.unshift(function (value) {
+                    return parseInt(value, 10);
+                });
+            }
+        };
+    });
+function quantitySelectDirective() {
+
+    return {
+        scope: {
+            ngModel: '='
+        },
+        restrict: 'A',
+        replace: true,
+        template: '<select class="product-quantity" integer="true"></select>',
+        link: function (scope, elem, attrs) {
+
+            var N = attrs.max;
+            availableOptions = [];
+
+            for (var i = 1; i <= N; i++) {
+                availableOptions.push(i);
+            }
+
+            var select2Options = {
+                data: availableOptions,
+                tags: true,
+
+                //Allow manually entered text in drop down.
+                createSearchChoice: function (term, data) {
+                    if ($(data).filter(function () {
+                            return this.text.localeCompare(term) === 0;
+                        }).length === 0) {
+                        return {
+                            id: parseInt(term),
+                            text: parseInt(term)
+                        };
+                    }
+                },
+            }
+
+            scope.$watch('ngModel', function (value) {
+                if (value > N) {
+                    elem.append('<option value="' + value + '">' + value + '</option>');
+                }
+                elem.val(value);
+                elem.trigger('change.select2');
+            });
+
+
+            elem.select2(select2Options);
+
+        }
+    };
+}
+
+angular
+    .module('common.directives')
+    .directive("quantitySelect", quantitySelectDirective);
+function spinnerDirective(EVENT_NAMES) {
+    return function ($scope, element) {
+        $scope.$on(EVENT_NAMES.loader_show, function () {
+            element[0].style.display = "inline";
+            return element;
+        });
+        return $scope.$on(EVENT_NAMES.loader_hide, function () {
+            TweenMax.to(element, 1, {
+                autoAlpha: 0,
+            });
+            return element;
+        });
+    };
+}
+
+angular
+    .module('common.directives')
+    .directive("spinnerLoader", spinnerDirective);
 function customCurrency(currencyService) {
 	return function(input) {
 		return currencyService.currencyFormat(input);
