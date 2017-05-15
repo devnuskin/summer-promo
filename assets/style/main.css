@@ -242,7 +242,7 @@ body {
     width: 30%;
     min-width: 400px;
     margin-top: -15px;
-}
+}   
 
 @media (max-width: 767px) {
     #promo-button-wrapper {
@@ -508,9 +508,9 @@ body {
     position: fixed;
     width: 280px;
     z-index: 360;
-    left: 95%;
+    left: 100%;
     top: 50vh;
-    transform: translate(0%, -50%);
+    transform: translate(-20px, -50%);
     font-size: 16px;
     word-break: break-word;
     text-transform: uppercase;
@@ -523,10 +523,27 @@ body {
 #promo-info-popup.show {
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 1);
 }
 
+
+#promo-info-popup .label{
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateX(-50%) rotate(-90deg);
+    font-size: 10px;    
+    pointer-events: none;
+}
+#promo-info-popup.show .label{
+    display: none;
+}
 #promo-info-popup .popup-content {
     padding: 30px 20px;
+    opacity: 0; 
+}
+#promo-info-popup.show .popup-content{
+    opacity: 1; 
 }
 
 #promo-info-popup .close-button {
@@ -2672,14 +2689,17 @@ body {
 
 #products .product-description {
     text-align: justify;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
     margin-bottom: 13px;
-    max-height: 160px;
+    max-height: 130px;
     overflow: auto;
     position: relative;
 }
 
 #products .product-links {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     font-size: 12px;
     text-align: center;
 }
@@ -3932,7 +3952,7 @@ body {
 
 #main-view {
     position: relative;
-    /*min-height: 610px;*/
+    min-height: 610px;
     max-height: 755px;
     height: calc(68vh + 126px - 54px);
     overflow: hidden;

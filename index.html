@@ -119,6 +119,7 @@
                         cartButton2: "Go to checkout",
                         cartButton3: "Discover exclusive accessories",
                         promoInformation: 'Buy at least <strong>3 different products</strong> to discover the <strong>unique branded items</strong>',
+                        promoInformationLabel: 'Game rules',
                         priceLabel: 'Price:',
                         psvLabel: 'PSV:',
                         quantityLabel: 'Quantity :',
@@ -383,6 +384,7 @@
                                 <div id="promo-info-popup" ng-class="{'show': !mainVm.hasClosedPromoInformationPopup}">
                                     <button class="close-button" ng-click="mainVm.closePromoInformationPopup()"></button>
                                     <div ng-click="mainVm.openPromoInformationPopup()" class="popup-content" ng-bind-html="$root.translations.common.promoInformation"></div>
+                                    <span class="label" ng-bind="$root.translations.common.promoInformationLabel"></span>
                                 </div>
 
                                 <section id="section-products">

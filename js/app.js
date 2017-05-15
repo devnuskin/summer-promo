@@ -126,33 +126,34 @@ angular
         });
     })
     .run(function (categoryService, productService) {
-        /*
-        var baseUrl = '#/shop/normal';
 
-        // Find and prepare hamburger nav menu
-        var $leftNavbar = $('#leftNavSideBar');
-        var $topLevelNavItems = $leftNavbar.find('.topLevelNavItems');
-        $topLevelNavItems.show().find('.firstLvl').hide();
+        angular.element(document).ready(function () {
+            var baseUrl = '#/shop/normal';
 
-        // add categories and products to nav menu
-        var categories = categoryService.getNormalCategories();
-        var products = productService.getNormalProducts();
-        categories.forEach(function (cat) {
-            window.leftSideNav.addTopLevelNavItem(cat.title);
-            window.leftSideNav.addSubLevel(cat.title, baseUrl + '/category/' + cat.key);
-            products.forEach(function (prod) {
-                if (prod.categoryId === cat.key) {
-                    var url = baseUrl + '/category/' + cat.key + '/product/' + prod.sku;
-                    window.leftSideNav.addSubLevelList(prod.name, url);
-                }
+            // Find and prepare hamburger nav menu
+            var $leftNavbar = $('#leftNavSideBar');
+            var $topLevelNavItems = $leftNavbar.find('.topLevelNavItems');
+            $topLevelNavItems.show().find('.firstLvl').hide();
+
+            // add categories and products to nav menu
+            var categories = categoryService.getNormalCategories();
+            var products = productService.getNormalProducts();
+            categories.forEach(function (cat) {
+                window.leftSideNav.addTopLevelNavItem(cat.title);
+                window.leftSideNav.addSubLevel(cat.title, baseUrl + '/category/' + cat.key);
+                products.forEach(function (prod) {
+                    if (prod.categoryId === cat.key) {
+                        var url = baseUrl + '/category/' + cat.key + '/product/' + prod.sku;
+                        window.leftSideNav.addSubLevelList(prod.name, url);
+                    }
+                });
             });
-        });
 
-        // Force close navbar on selection of menu item
-        // (reason: navbar normally closes on page load;
-        // Angular state links do not cause page load)
-        $leftNavbar.find('.subLevelNav').click(window.leftSideNav.triggerLeftSideNav);
-        */
+            // Force close navbar on selection of menu item
+            // (reason: navbar normally closes on page load;
+            // Angular state links do not cause page load)
+            $leftNavbar.find('.subLevelNav').click(window.leftSideNav.triggerLeftSideNav);
+        });
     });
 angular.module('common.directives', []);
 angular.module('common.filters', []);
