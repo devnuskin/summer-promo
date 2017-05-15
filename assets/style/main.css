@@ -242,7 +242,6 @@ body {
     width: 30%;
     min-width: 400px;
     margin-top: -15px;
-    display: none;
 }
 
 @media (max-width: 767px) {
