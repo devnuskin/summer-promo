@@ -24,7 +24,7 @@ angular
     .config(function ($stateProvider, $urlRouterProvider, DEFAULT_URL_PAGE,
         localStorageServiceProvider, $httpProvider) {
 
-        // Routing 
+        // Routing
         $stateProvider
             .state('app', {
                 abstract: true,
@@ -126,33 +126,33 @@ angular
         });
     })
     .run(function (categoryService, productService) {
-        /*
-        var baseUrl = '#/shop/normal';
+        angular.element(document).ready(function(){
+	        var baseUrl = '#/shop/normal';
 
-        // Find and prepare hamburger nav menu
-        var $leftNavbar = $('#leftNavSideBar');
-        var $topLevelNavItems = $leftNavbar.find('.topLevelNavItems');
-        $topLevelNavItems.show().find('.firstLvl').hide();
+	        // Find and prepare hamburger nav menu
+	        var $leftNavbar = $('#leftNavSideBar');
+	        var $topLevelNavItems = $leftNavbar.find('.topLevelNavItems');
+	        $topLevelNavItems.show().find('.firstLvl').hide();
 
-        // add categories and products to nav menu
-        var categories = categoryService.getNormalCategories();
-        var products = productService.getNormalProducts();
-        categories.forEach(function (cat) {
-            window.leftSideNav.addTopLevelNavItem(cat.title);
-            window.leftSideNav.addSubLevel(cat.title, baseUrl + '/category/' + cat.key);
-            products.forEach(function (prod) {
-                if (prod.categoryId === cat.key) {
-                    var url = baseUrl + '/category/' + cat.key + '/product/' + prod.sku;
-                    window.leftSideNav.addSubLevelList(prod.name, url);
-                }
-            });
+	        // add categories and products to nav menu
+	        var categories = categoryService.getNormalCategories();
+	        var products = productService.getNormalProducts();
+	        categories.forEach(function (cat) {
+	            window.leftSideNav.addTopLevelNavItem(cat.title);
+	            window.leftSideNav.addSubLevel(cat.title, baseUrl + '/category/' + cat.key);
+	            products.forEach(function (prod) {
+	                if (prod.categoryId === cat.key) {
+	                    var url = baseUrl + '/category/' + cat.key + '/product/' + prod.sku;
+	                    window.leftSideNav.addSubLevelList(prod.name, url);
+	                }
+	            });
+	        });
+
+	        // Force close navbar on selection of menu item
+	        // (reason: navbar normally closes on page load;
+	        // Angular state links do not cause page load)
+	        $leftNavbar.find('.subLevelNav').click(window.leftSideNav.triggerLeftSideNav);
         });
-
-        // Force close navbar on selection of menu item
-        // (reason: navbar normally closes on page load;
-        // Angular state links do not cause page load)
-        $leftNavbar.find('.subLevelNav').click(window.leftSideNav.triggerLeftSideNav);
-        */
     });
 angular.module('common.directives', []);
 angular.module('common.filters', []);
@@ -334,7 +334,7 @@ function MainCtrl($state, categoryService, $window, $stateParams,
         //redirectIfNoAccess();
         mainVm.canBuyPromoProducts = shoppingCartService.canBuyPromoProducts();
         mainVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();
-        
+
     });
 
     return mainVm;
@@ -484,7 +484,7 @@ angular
     .controller('navigationCartController', navigationCartController)
     .directive('navigationCartRepeatDirective', function () {
         return function (scope, element, attrs) {
-    
+
         };
     })
 function productController(productService, $stateParams, shoppingCartService, $state) {
@@ -623,14 +623,14 @@ function productsController($scope, productService, $stateParams, ROUTING_SHOP_S
             $products.find('.product-category2').wrapAll('<div class="slide-category slide-category2"/>');
             $products.find('.product-category3').wrapAll('<div class="slide-category slide-category3"/>');
             */
-            
+
             $products.find('.slide-category1').slick(slickOptions);
             $products.find('.slide-category2').slick(slickOptions);
             $products.find('.slide-category3').slick(slickOptions);
-            
-            
+
+
         }
-        
+
     });
 
     return productsVm;
@@ -652,9 +652,9 @@ angular
         }
     })
     .directive('productsRepeatDirective', function () {
-        
+
         return function (scope, element, attrs) {
-            
+
             if (scope.$index < 4 || scope.$index == 5) {
                 TweenMax.fromTo(element, 0.5, {
                     opacity: 0,
@@ -710,12 +710,12 @@ function shoppingCartController(shoppingCartService, $rootScope,
 
     $rootScope.$on(EVENT_NAMES.shoppingCartUpdated, function () {
         initVm();
-        shoppingCartVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();     
+        shoppingCartVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();
     });
     shoppingCartVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();
 
 
-    
+
 
 
     return shoppingCartVm;
@@ -996,19 +996,19 @@ function productService($http, identityService, productModel,
 
 
     api.initAllProducts = function () {
-        
+
         var allProducts = [];
         var products = _.chain(nuskin.summerPromo.categories.items)
             .pluck('products')
             .flatten(true)
             .value();
-        
-            
+
+
 
         for (var i = 0; i < products.length; i++) {
             var product = products[i];
             product.menuOpened = false;
-            
+
             if(nuskin.summerPromo.ended){
 
                 allProducts.push(
