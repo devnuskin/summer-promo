@@ -242,6 +242,7 @@ body {
     width: 30%;
     min-width: 400px;
     margin-top: -15px;
+    display: none;
 }
 
 @media (max-width: 767px) {
@@ -310,11 +311,11 @@ body {
 }
 
 .radial-progress .circle .mask {
-    clip: rect(0px, 180px, 180px, 90px);
+    clip: rect(0px, 90px, 180px, 0px);
 }
 
 .radial-progress .circle .mask .fill {
-    clip: rect(0px, 90px, 180px, 0px);
+    clip: rect(0px, 180px, 180px, 90px);
     background-color: #9d9c9a;
 }
 
@@ -345,28 +346,28 @@ body {
 
 .radial-progress .circle .mask.full,
 .radial-progress .circle .fill {
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    transform: rotate(0deg);
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
 }
 
 .radial-progress .circle .fill.fix {
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    transform: rotate(0deg);
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
 }
 
 .radial-progress.level-2 .circle .mask.full,
 .radial-progress.level-2 .circle .fill {
-    -webkit-transform: rotate(59.4deg);
-    -ms-transform: rotate(59.4deg);
-    transform: rotate(59.4deg);
+    -webkit-transform: rotate(299.4deg);
+    -ms-transform: rotate(299.4deg);
+    transform: rotate(299.4deg);
 }
 
 .radial-progress.level-2 .circle .fill.fix {
-    -webkit-transform: rotate(118.8deg);
-    -ms-transform: rotate(118.8deg);
-    transform: rotate(118.8deg);
+    -webkit-transform: rotate(237.6deg);
+    -ms-transform: rotate(237.6deg);
+    transform: rotate(237.6deg);
 }
 
 .radial-progress.level-2 .inset .content {
@@ -375,15 +376,15 @@ body {
 
 .radial-progress.level-1 .circle .mask.full,
 .radial-progress.level-1 .circle .fill {
-    -webkit-transform: rotate(118.8deg);
-    -ms-transform: rotate(118.8deg);
-    transform: rotate(118.8deg);
+    -webkit-transform: rotate(238.8deg);
+    -ms-transform: rotate(238.8deg);
+    transform: rotate(238.8deg);
 }
 
 .radial-progress.level-1 .circle .fill.fix {
-    -webkit-transform: rotate(237.6deg);
-    -ms-transform: rotate(237.6deg);
-    transform: rotate(237.6deg);
+    -webkit-transform: rotate(118.8deg);
+    -ms-transform: rotate(118.8deg);
+    transform: rotate(118.8deg);
 }
 
 .radial-progress.level-1 .inset .content {
@@ -1964,7 +1965,7 @@ body {
         position: relative;
         font-size: 13px;
         font-weight: bold;
-        color: #fff;
+        text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.3);
     }
     .product .presale-label:after {
         content: "";
@@ -1986,6 +1987,9 @@ body {
         min-height: 420px;
     }
     */
+    .product .presale-label {
+        color: #fff;
+    }
     #products .product .product-display:before,
     #products .product .product-display:after {
         content: none;
@@ -3929,9 +3933,10 @@ body {
 
 #main-view {
     position: relative;
-    min-height: 610px;
+    /*min-height: 610px;*/
     max-height: 755px;
     height: calc(68vh + 126px - 54px);
+    overflow: hidden;
 }
 
 @media (max-width: 767px) {
