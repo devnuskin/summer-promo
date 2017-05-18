@@ -39,7 +39,7 @@ var userTypes = {
 	To adapt for release
 */
 var app_version = '0.0.1';
-var imagesUrl = 'http://www.nuskin.com';
+var imagesUrl = 'http://test.nuskin.com';
 var checkoutUrl = 'http://www.google.com';
 var currencyWebServiceUrl = 'http://test.nuskin.com/content/configuration/currencies.jsons';
 var defaultImageURL = '/assets/img/default.jpg';
