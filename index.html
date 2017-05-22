@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="assets/style/main.css">
     
 
-
     <!-- REMOVE THAT FOR PRODCUTION -->
     <script>
         var userType = "10";
@@ -102,7 +101,7 @@
                         remove: 'Remove',
                         goBack: 'Back',
                         discoverBrandedItems: 'Discover <br> the <strong>branded <br> items</strong>',
-                        discoverBrandedItemsActive: 'Discover <br> the <strong>branded <br> items</strong> now',
+                        discoverBrandedItemsActive: 'Access <br> the <strong>branded <br>items</strong>',
                         ritual: 'Discover the collection',
                         titleProduct: 'Product',
                         basket: 'Cart',
@@ -176,7 +175,7 @@
 
         var product = {};
         product.sku = "97139105";
-        product.isOutOfStock = false;
+        product.isOutOfStock = true;
         product.isInPresales = false;
 
         nuskin.summerPromo.categories.items[0].products.push(product);
@@ -380,13 +379,6 @@
                                     <div class="badge shipping" ng-bind-html="$root.translations.common.shippingBadge"></div>
                                 </div>
 
-                                <!-- PROMO INFORMATION POPUP -->
-                                <div id="promo-info-popup" ng-class="{'show': !mainVm.hasClosedPromoInformationPopup}">
-                                    <button class="close-button" ng-click="mainVm.closePromoInformationPopup()"></button>
-                                    <div ng-click="mainVm.openPromoInformationPopup()" class="popup-content" ng-bind-html="$root.translations.common.promoInformation"></div>
-                                    <span class="label" ng-bind="$root.translations.common.promoInformationLabel"></span>
-                                </div>
-
                                 <section id="section-products">
                                     <!-- ZONE CATEGORIES -->
                                     <nav id="nav-rituals">
@@ -396,6 +388,15 @@
                                     <div id="main-view" ui-view="container"></div>
                                 </section>
                             </div>
+
+                                <!-- PROMO INFORMATION POPUP -->
+                                <div id="promo-info-popup" ng-class="{'show': !mainVm.hasClosedPromoInformationPopup}">
+                                    <div class="promo-info-popup-wrapper">  
+                                        <button class="close-button" ng-click="mainVm.closePromoInformationPopup()"></button>
+                                        <div ng-click="mainVm.openPromoInformationPopup()" class="popup-content" ng-bind-html="$root.translations.common.promoInformation"></div>
+                                        <span class="label" ng-bind="$root.translations.common.promoInformationLabel"></span>
+                                    </div>
+                                </div>
 
                             <div id="main-footer" ui-view="footer"></div>
 

@@ -277,7 +277,6 @@ function MainCtrl($state, categoryService, $window, $stateParams,
     }
     mainVm.openPromoInformationPopup = function () {
         //identityService.closePromoInformationPopup();
-        console.log('ok');
         mainVm.hasClosedPromoInformationPopup = false; //identityService.hasClosedPromoInformationPopup();
     }
     mainVm.hasClosedPromoInformationPopup = false; //identityService.hasClosedPromoInformationPopup();
@@ -617,17 +616,17 @@ function productsController($scope, productService, $stateParams, ROUTING_SHOP_S
                 slidesToShow: 1,
                 infinite: false,
                 slide: '.product',
+                initialSlide: 1,
                 //variableWidth: true,
             };
-            /*
-            $products.find('.product-category1').wrapAll('<div class="slide-category slide-category1"/>');
-            $products.find('.product-category2').wrapAll('<div class="slide-category slide-category2"/>');
-            $products.find('.product-category3').wrapAll('<div class="slide-category slide-category3"/>');
-            */
+
+            cat = ngRepeatFinishedEvent.targetScope.$parent.category.key;
             
-            $products.find('.slide-category1').slick(slickOptions);
-            $products.find('.slide-category2').slick(slickOptions);
-            $products.find('.slide-category3').slick(slickOptions);
+            // Put LSO in middle
+            $lso = $products.find('.slide-' +  cat + ' .lso:eq(0)');
+            $lso.insertAfter($lso.next());
+            
+            $products.find('.slide-' +  cat).slick(slickOptions);
             
             
         }
@@ -1177,7 +1176,6 @@ function ShoppingCartService($rootScope, identityService, EVENT_NAMES, localStor
     };
 
     api.hasProduct = function (product) {
-        console.log('ok');
          if(cart.products && cart.products.length > 0){
             var productCart = _.find(cart.products, function (p) {
                 return p.sku == product.sku;

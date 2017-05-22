@@ -139,12 +139,12 @@ angular.module("../dev/app/modules/navigationCart/navigationCart.tpl.html", []).
     "                <div ui-sref=\"app.shop.category({showCase: 'promo', categoryId:'promoProducts'})\" class=\"alert-text text-3\" ng-bind-html=\"$root.translations.common.cartInvitation3\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
+    "        <div ng-if=\"navigationCartVm.regularProductsLength > 2\" class=\"alert-cta\">\n" +
+    "            <button ng-click=\"navigationCartVm.cartSrv.displayCart()\" class=\"button-2\" ng-bind-html=\"$root.translations.common.cartButton2\"></button>\n" +
+    "            <!--<a class=\"button-3\" ui-sref=\"app.shop.category({showCase: 'promo', categoryId:'promoProducts'})\" ng-bind-html=\"$root.translations.common.cartButton3\"></a>-->\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div ng-if=\"navigationCartVm.regularProductsLength > 2\" class=\"box alert-cta\">\n" +
-    "        <button ng-click=\"navigationCartVm.cartSrv.displayCart()\" class=\"button-2\" ng-bind-html=\"$root.translations.common.cartButton2\"></button>\n" +
-    "        <a class=\"button-3\" ui-sref=\"app.shop.category({showCase: 'promo', categoryId:'promoProducts'})\" ng-bind-html=\"$root.translations.common.cartButton3\"></a>\n" +
-    "    </div>\n" +
     "</div>");
 }]);
 
@@ -305,10 +305,12 @@ angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templ
   $templateCache.put("../dev/app/modules/products/products.tpl.html",
     "<div id=\"products\" class=\"overview {{productsVm.activeCategory}}\" ng-class=\"{promo: product.selected}\" ng-animate-children=true>\n" +
     "    <div class=\"slide-category slide-{{::category.key}}\" ng-repeat=\"category in productsVm.categories\">\n" +
+    "\n" +
     "        <h3 class=\"mobile-only\" ng-bind-html=\"category.name\" ng-click=\"productsVm.goToCategory(category.key);\"></h3>\n" +
+    "\n" +
     "        <article id=\"product-display-{{::product.sku}}\" class=\"product product-{{($parent.$index * 3) + ($index+1)}} product-{{::product.categoryId}}\"\n" +
     "            ng-repeat=\"product in productsVm.products | filter : {categoryId:category.key}\" ng-mouseenter=\"productsVm.setActiveCategory(product.categoryId);\"\n" +
-    "            ng-mouseleave=\"productsVm.setActiveCategory('');\" products-repeat-directive on-finish-render=\"ngRepeatFinished\">\n" +
+    "            ng-mouseleave=\"productsVm.setActiveCategory('');\" products-repeat-directive on-finish-render=\"ngRepeatFinished\" ng-class=\"{'lso' : product.isInPresales}\">\n" +
     "            <div class=\"product-display\">\n" +
     "\n" +
     "                <div class=\"product-image\">\n" +
@@ -334,7 +336,7 @@ angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templ
     "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"mobile-only\">\n" +
+    "                <div class=\"mobile-only product-action\">\n" +
     "                    <div class=\"quantity\">\n" +
     "                        <div quantity-select max=\"100\" ng-model=\"product.quantity\"></div>\n" +
     "                    </div>\n" +
@@ -376,8 +378,6 @@ angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templ
     "\n" +
     "            <a class=\"addProduct\" ng-click=\"productsVm.cartSrv.addProduct(product)\" ng-bind=\"$root.translations.common.addToCart\" ng-if=\"product.menuOpened && !product.isOutOfStock \"></a>\n" +
     "            <a class=\"viewProduct\" ng-click=\"product.menuOpened = false; productsVm.goToProduct(product)\" ng-bind=\"$root.translations.common.viewProduct\"\n" +
-    "                ng-if=\"product.menuOpened && !product.isOutOfStock\"></a>\n" +
-    "            <a class=\"viewProduct\" ng-click=\"product.menuOpened = false; productsVm.goToProduct(product)\" ng-bind=\"$root.translations.common.viewProductOutOfStock\"\n" +
     "                ng-if=\"product.menuOpened && product.isOutOfStock \"></a>\n" +
     "\n" +
     "        </div>\n" +
