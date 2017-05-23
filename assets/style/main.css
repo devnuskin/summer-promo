@@ -468,7 +468,7 @@ body {
     #discount-badges {
         bottom: auto;
         top: 53px;
-        transform: translateX(55px);
+        transform: translate(85px, -8px);
         font-size: 9px;
         height: 76px;
         width: 58px;
@@ -561,13 +561,14 @@ body {
 
 #promo-info-popup .popup-content {
     padding: 30px 20px;
-    max-width: 320px;
+    max-width: 410px;
     min-width: 230px;
     margin: 0 auto;
     opacity: 0;
     background-color: rgba(255, 255, 255, 1);
     text-align: center;
     overflow: hidden;
+    font-size: 25px;
 }
 
 #promo-info-popup.show .popup-content {
@@ -595,6 +596,9 @@ body {
     #promo-info-popup .promo-info-popup-wrapper {
         max-width: 330px;
     padding:  0;
+    }
+    #promo-info-popup .popup-content {
+        font-size: 16px;
     }
 }
 
@@ -640,7 +644,7 @@ body {
 @media (max-width: 767px) {
     #back-button {
         position: fixed;
-        top: 46px;
+        top: 76px;
         left: 0;
         /*
         color: #000;
@@ -1270,51 +1274,49 @@ body {
     }
     .background .halos .halo.regular,
     .background .halos .halo.promo {
-        background-image: -ms-linear-gradient(top, #ba7e00 10%, #E2A201 90%);
-        background-image: -moz-linear-gradient(top, #ba7e00 10%, #E2A201 90%);
-        background-image: -o-linear-gradient(top, #ba7e00 10%, #E2A201 90%);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ba7e00), color-stop(100, #E2A201));
-        background-image: -webkit-linear-gradient(top, #ba7e00 10%, #E2A201 90%);
-        background-image: linear-gradient(to bottom, #ba7e00 10%, #E2A201 90%);
+        background-image: -ms-linear-gradient(top, #ffd12a 30%, #e2a803 90%);
+        background-image: -moz-linear-gradient(top, #ffd12a 30%, #e2a803 90%);
+        background-image: -o-linear-gradient(top, #ffd12a 30%, #e2a803 90%);
+        background-image: -webkit-linear-gradient(top, #ffd12a 30%, #e2a803 90%);
+        background-image: linear-gradient(to bottom, #ffd12a 30%, #e2a803 90%);
     }
     .module-2 .background .halos .halo.regular,
     .module-2 .background .halos .halo.promo {
-        background-image: -ms-linear-gradient(top, #dd4b43 10%, #F45C47 90%);
-        background-image: -moz-linear-gradient(top, #dd4b43 10%, #F45C47 90%);
-        background-image: -o-linear-gradient(top, #dd4b43 10%, #F45C47 90%);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #dd4b43), color-stop(100, #F45C47));
-        background-image: -webkit-linear-gradient(top, #dd4b43 10%, #F45C47 90%);
-        background-image: linear-gradient(to bottom, #dd4b43 10%, #F45C47 90%);
+        background-image: -ms-linear-gradient(top, #ff8575 30%, #dd4b43 90%);
+        background-image: -moz-linear-gradient(top, #ff8575 30%, #dd4b43 90%);
+        background-image: -o-linear-gradient(top, #ff8575 30%, #dd4b43 90%);
+        background-image: -webkit-linear-gradient(top, #ff8575 30%, #dd4b43 90%);
+        background-image: linear-gradient(to bottom, #ff8575 30%, #dd4b43 90%);
+
     }
     .module-3 .background .halos .halo.regular,
     .module-3 .background .halos .halo.promo {
-        background-image: -ms-linear-gradient(top, #159AA9 10%, #17ADD5 90%);
-        background-image: -moz-linear-gradient(top, #159AA9 10%, #17ADD5 90%);
-        background-image: -o-linear-gradient(top, #159AA9 10%, #17ADD5 90%);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #159AA9), color-stop(100, #17ADD5));
-        background-image: -webkit-linear-gradient(top, #159AA9 10%, #17ADD5 90%);
-        background-image: linear-gradient(to bottom, #159AA9 10%, #17ADD5 90%);
+        background-image: -ms-linear-gradient(top, #3dceff 30%, #1991c4 90%);
+        background-image: -moz-linear-gradient(top, #3dceff 30%, #1991c4 90%);
+        background-image: -o-linear-gradient(top, #3dceff 30%, #1991c4 90%);
+        background-image: -webkit-linear-gradient(top, #3dceff 30%, #1991c4 90%);
+        background-image: linear-gradient(to bottom, #3dceff 30%, #1991c4 90%);
     }
     .module-4 .background .halos .halo.regular,
     .module-4 .background .halos .halo.promo {
-        background-image: -ms-linear-gradient(top, #679B2F 0%, #76bf2f 100%);
-        background-image: -moz-linear-gradient(top, #679B2F 0%, #76bf2f 100%);
-        background-image: -o-linear-gradient(top, #679B2F 0%, #76bf2f 100%);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #679B2F), color-stop(100, #76bf2f));
-        background-image: -webkit-linear-gradient(top, #679B2F 0%, #76bf2f 100%);
-        background-image: linear-gradient(to bottom, #679B2F 0%, #76bf2f 100%);
+        background-image: -ms-linear-gradient(top, #88de35 30%, #679B2F 100%);
+        background-image: -moz-linear-gradient(top, #88de35 30%, #679B2F 100%);
+        background-image: -o-linear-gradient(top, #88de35 30%, #679B2F 100%);
+        background-image: -webkit-linear-gradient(top, #88de35 30%, #679B2F 100%);
+        background-image: linear-gradient(to bottom, #88de35 30% #679B2F 100%);
+    
     }
     .background .floor {
-        background: #e2a201;
+        background: #e2a803;
     }
     .module-2 .background .floor {
-        background: #f45c47;
+        background: #dd4b43;
     }
     .module-3 .background .floor {
-        background: #17add5;
+        background: #1991c4;
     }
     .module-4 .background .floor {
-        background: #76bf2f;
+        background: #679B2F;
     }
 }
 
@@ -2054,7 +2056,7 @@ body {
     }
     */
     .product .presale-label {
-        color: #fff;
+        color: #000;
     }
     #products .product .product-display:before,
     #products .product .product-display:after {
@@ -2180,7 +2182,6 @@ body {
     #products.overview .product {
         pointer-events: none;
         text-align: center;
-        trans
     }
     #products.overview .product .product-display img {
         transform: scale(0.5, 0.5);
@@ -2219,7 +2220,7 @@ body {
         position: relative;
         z-index: 100;
         text-align: center;
-        margin: 0 0;
+        margin: 0 0 15px;
         color: #fff;
         font-weight: normal;
         text-shadow: 0 1px 5px rgba(0, 0, 0, 0.43);
@@ -2240,7 +2241,7 @@ body {
         position: absolute;
         z-index: 50;
         top: 50%;
-        left: 25px;
+        left: 20%;
         overflow: hidden;
         outline: 0;
         cursor: pointer;
@@ -2264,7 +2265,7 @@ body {
     }
     #products.overview .slick-next {
         left: auto;
-        right: 25px;
+        right: 20%;
         text-align: right;
     }
     #products.overview .slick-next:before {
@@ -2943,14 +2944,6 @@ body {
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-#products .product-action {
-    display: none;
-}
-
-#products .slick-current .product-action {
-    display: block;
-}
-
 #products .quantity {
     /*    float: right;*/
 }
@@ -3053,6 +3046,16 @@ body {
 }
 
 @media (max-width: 767px) {
+
+
+    #products.overview .product-action {
+        display: none;
+    }
+
+    #products.overview .slick-current .product-action {
+        display: block;
+    }
+
     #products .product-action {
         float: left;
         width: 125px;
@@ -3251,12 +3254,15 @@ body {
 @media (max-width: 767px) {
     #products .quick-buy-tooltip {
         display: block;
-        position: absolute;
+        position: relative;
         left: 50%;
         top: 100%;
         transform: translateX(-50%);
         width: 150px;
         padding-bottom: 15px;
+    }
+    #products.overview .quick-buy-tooltip {
+        position: absolute;
     }
     #products .quick-buy-tooltip:before {
         top: auto;
@@ -3320,6 +3326,10 @@ body {
     color: #000;
 }
 
+#products .product-soldout-notification.mobile-only {
+    max-width: 170px;
+    margin: 15px auto;
+}
 
 /***
  * Quantity controls
@@ -3409,17 +3419,17 @@ body {
     position: absolute;
     right: 46%;
     bottom: 240px;
-    max-width: 50%;
+    max-width: 36%;
     max-height: 345px;
 }
 
 #rituals .ritual-video iframe {
-    width: 320px;
-    height: 180px;
+    width: 275px;
+    height: 154px;
 }
 
 #rituals .ritual-description {
-    max-width: 250px;
+    max-width: 225px;
     max-height: 155px;
     overflow-y: auto;
     text-align: justify;
@@ -3546,11 +3556,21 @@ body {
     #rituals {
         padding-top: 160px;
     }
+#rituals .product .presale-infos {
+    position: static;
+    width: auto;
+    transform: none;
+}
+
     #rituals .ritual-video {
         position: static;
         width: 100%;
         max-width: 320px;
         margin: 0 auto;
+    }
+    #rituals .ritual-video iframe{
+        width: 320px;
+        height: 180px;
     }
     #rituals .ritual-description h2,
     #rituals .ritual-description h3,
@@ -3559,8 +3579,8 @@ body {
     }
     #rituals .ritual-description {
         position: static;
-        width: 100%;
-        max-width: 250px;
+        width: 90%;
+        max-width: none;
         margin: 0 auto;
         max-height: none;
         touch-action: auto;
@@ -3684,11 +3704,39 @@ body {
     left: 0;
     display: block;
     background: #1eceff;
-    background: -moz-linear-gradient(left, #1eceff 0%, #0198c5 100%);
-    background: -webkit-linear-gradient(left, #1eceff 0%, #0198c5 100%);
-    background: linear-gradient(to right, #1eceff 0%, #0198c5 100%);
     transition: width 0.5s ease-in-out;
 }
+
+#mobile-infos .button-3:after  {
+        background-image: -ms-linear-gradient(left, #ffd12a 30%, #e2a803 90%);
+        background-image: -moz-linear-gradient(left, #ffd12a 30%, #e2a803 90%);
+        background-image: -o-linear-gradient(left, #ffd12a 30%, #e2a803 90%);
+        background-image: -webkit-linear-gradient(left, #ffd12a 30%, #e2a803 90%);
+        background-image: linear-gradient(to right, #ffd12a 30%, #e2a803 90%);
+    }
+    .module-2 #mobile-infos .button-3:after  {
+        background-image: -ms-linear-gradient(left, #ff8575 30%, #dd4b43 90%);
+        background-image: -moz-linear-gradient(left, #ff8575 30%, #dd4b43 90%);
+        background-image: -o-linear-gradient(left, #ff8575 30%, #dd4b43 90%);
+        background-image: -webkit-linear-gradient(left, #ff8575 30%, #dd4b43 90%);
+        background-image: linear-gradient(to right, #ff8575 30%, #dd4b43 90%);
+
+    }
+    .module-3 #mobile-infos .button-3:after  {
+        background-image: -ms-linear-gradient(left, #3dceff 30%, #1991c4 90%);
+        background-image: -moz-linear-gradient(left, #3dceff 30%, #1991c4 90%);
+        background-image: -o-linear-gradient(left, #3dceff 30%, #1991c4 90%);
+        background-image: -webkit-linear-gradient(left, #3dceff 30%, #1991c4 90%);
+        background-image: linear-gradient(to right, #3dceff 30%, #1991c4 90%);
+    }
+    .module-4 #mobile-infos .button-3:after  {
+        background-image: -ms-linear-gradient(left, #88de35 30%, #679B2F 100%);
+        background-image: -moz-linear-gradient(left, #88de35 30%, #679B2F 100%);
+        background-image: -o-linear-gradient(left, #88de35 30%, #679B2F 100%);
+        background-image: -webkit-linear-gradient(left, #88de35 30%, #679B2F 100%);
+        background-image: linear-gradient(to right, #88de35 30% #679B2F 100%);
+    
+    }
 
 #mobile-infos.level-0 .button-3:after {
     width: 0%;
@@ -3920,6 +3968,12 @@ body {
     transition: all 0.3s ease-out;
 }
 
+#cart-overview .text-switch{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 #cart-overview .button-1,
 #cart-overview .button-2,
 #cart-overview .button-3 {
@@ -3945,7 +3999,7 @@ body {
 
 #cart-overview .button-2 {
     display: inline-block;
-    line-height: 1.5;
+    line-height: 1.1;
     vertical-align: middle;
     background-color: #000;
     color: #fff;

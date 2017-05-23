@@ -1,6 +1,6 @@
 angular.module('templates-app', ['../dev/app/modules/category/category.tpl.html', '../dev/app/modules/faq/faq.tpl.html', '../dev/app/modules/navigationCart/navigationCart.tpl.html', '../dev/app/modules/product/product.tpl.html', '../dev/app/modules/products/products.tpl.html', '../dev/app/modules/shoppingCart/shoppingCart.tpl.html']);
 
-angular.module("../dev/app/modules/category/category.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("../dev/app/modules/category/category.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../dev/app/modules/category/category.tpl.html",
     "<div id=\"rituals\" category-directive>\n" +
     "\n" +
@@ -11,13 +11,13 @@ angular.module("../dev/app/modules/category/category.tpl.html", []).run(["$templ
     "    <div class=\"products\">\n" +
     "        <article id=\"product-display-{{::product.sku}}\" class=\"product product-{{$index+1}} product-category-{{::product.categoryId}}\" ng-repeat=\"product in categoryVm.products\" category-repeat-directive>\n" +
     "            <div ng-if=\"::product.isInPresales\" ng-bind=\"$root.translations.common.newProduct\"></div>\n" +
-    "\n" +
-    "            <img ng-click=\"product.menuOpened = false; categoryVm.goToProduct(product);\" ng-src=\"{{::product.urlImage}}\" alt=\"\" class=\"product-image\">\n" +
-    "\n" +
-    "\n" +
     "            <div class=\"presale-infos\" ng-if=\"product.isInPresales\">\n" +
     "                <div class=\"presale-label\" ng-bind=\"$root.translations.common.presaleLabel\"></div>\n" +
     "            </div>\n" +
+    "\n" +
+    "\n" +
+    "            <img ng-click=\"product.menuOpened = false; categoryVm.goToProduct(product);\" ng-src=\"{{::product.urlImage}}\" alt=\"\" class=\"product-image\">\n" +
+    "\n" +
     "\n" +
     "\n" +
     "            <div id=\"product-menu-{{::product.sku}}\" class=\"product-menu\" ng-class=\"{'active' : product.menuOpened}\" ng-click=\"categoryVm.closeMenus(product); product.menuOpened = !product.menuOpened\">\n" +
@@ -36,7 +36,7 @@ angular.module("../dev/app/modules/category/category.tpl.html", []).run(["$templ
     "</div>");
 }]);
 
-angular.module("../dev/app/modules/faq/faq.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("../dev/app/modules/faq/faq.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../dev/app/modules/faq/faq.tpl.html",
     "<h1>FAQ</h1>\n" +
     "<div ng-repeat=\"q in faqVm.questions\">\n" +
@@ -46,21 +46,21 @@ angular.module("../dev/app/modules/faq/faq.tpl.html", []).run(["$templateCache",
     "");
 }]);
 
-angular.module("../dev/app/modules/navigationCart/navigationCart.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("../dev/app/modules/navigationCart/navigationCart.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../dev/app/modules/navigationCart/navigationCart.tpl.html",
     "<div id=\"mobile-infos\" class=\"mobile-only\" ng-class=\"{'level-0' : navigationCartVm.regularProductsLength == 0, 'level-1' : navigationCartVm.regularProductsLength == 1, 'level-2' : navigationCartVm.regularProductsLength == 2}\">\n" +
     "    <div ng-switch=\"navigationCartVm.regularProductsLength\">\n" +
     "        <div ng-switch-when=\"0\">\n" +
-    "            <div class=\"alert-text text-0\" ng-bind-html=\"$root.translations.common.cartInvitationMobile0\"></div>\n" +
+    "            <div class=\"alert-text text-0\" ui-sref=\"app.shop({showCase: 'normal'})\" ng-bind-html=\"$root.translations.common.cartInvitationMobile0\"></div>\n" +
     "        </div>\n" +
     "        <div ng-switch-when=\"1\">\n" +
-    "            <div class=\"alert-text text-1\" ng-bind-html=\"$root.translations.common.cartInvitationMobile1\"></div>\n" +
+    "            <div class=\"alert-text text-1\" ui-sref=\"app.shop({showCase: 'normal'})\" ng-bind-html=\"$root.translations.common.cartInvitationMobile1\"></div>\n" +
     "        </div>\n" +
     "        <div ng-switch-when=\"2\">\n" +
-    "            <div class=\"alert-text text-2\" ng-bind-html=\"$root.translations.common.cartInvitationMobile2\"></div>\n" +
+    "            <div class=\"alert-text text-2\" ui-sref=\"app.shop({showCase: 'normal'})\" ng-bind-html=\"$root.translations.common.cartInvitationMobile2\"></div>\n" +
     "        </div>\n" +
     "        <div ng-switch-default>\n" +
-    "            <div class=\"alert-text text-3\" ng-bind-html=\"$root.translations.common.cartInvitationMobile3\"></div>\n" +
+    "            <div class=\"alert-text text-3\" ui-sref=\"app.shop.category({showCase: 'promo', categoryId:'promoProducts'})\" ng-bind-html=\"$root.translations.common.cartInvitationMobile3\"></div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -125,19 +125,15 @@ angular.module("../dev/app/modules/navigationCart/navigationCart.tpl.html", []).
     "\n" +
     "\n" +
     "    <div class=\"box alert\">\n" +
-    "        <div ng-switch=\"navigationCartVm.regularProductsLength\">\n" +
-    "            <div ng-switch-when=\"0\">\n" +
-    "                <div ui-sref=\"app.shop({showCase: 'normal'})\" class=\"alert-text text-0\" ng-bind-html=\"$root.translations.common.cartInvitation0\"></div>\n" +
+    "        <div ng-switch=\"navigationCartVm.regularProductsLength\" class=\"text-switch\">\n" +
+    "            <div ng-switch-when=\"0\" ui-sref=\"app.shop({showCase: 'normal'})\" class=\"alert-text text-0\" ng-bind-html=\"$root.translations.common.cartInvitation0\">\n" +
     "            </div>\n" +
-    "            <div ng-switch-when=\"1\">\n" +
-    "                <div ui-sref=\"app.shop({showCase: 'normal'})\" class=\"alert-text text-1\" ng-bind-html=\"$root.translations.common.cartInvitation1\"></div>\n" +
-    "            </div>\n" +
-    "            <div ng-switch-when=\"2\">\n" +
-    "                <div ui-sref=\"app.shop({showCase: 'normal'})\" class=\"alert-text text-2\" ng-bind-html=\"$root.translations.common.cartInvitation2\"></div>\n" +
-    "            </div>\n" +
-    "            <div ng-switch-default>\n" +
-    "                <div ui-sref=\"app.shop.category({showCase: 'promo', categoryId:'promoProducts'})\" class=\"alert-text text-3\" ng-bind-html=\"$root.translations.common.cartInvitation3\"></div>\n" +
-    "            </div>\n" +
+    "            <div ng-switch-when=\"1\" ui-sref=\"app.shop({showCase: 'normal'})\" class=\"alert-text text-1\" ng-bind-html=\"$root.translations.common.cartInvitation1\"></div>\n" +
+    "  \n" +
+    "            <div ng-switch-when=\"2\" ui-sref=\"app.shop({showCase: 'normal'})\" class=\"alert-text text-2\" ng-bind-html=\"$root.translations.common.cartInvitation2\"></div>\n" +
+    "        \n" +
+    "            <div ng-switch-default ui-sref=\"app.shop.category({showCase: 'promo', categoryId:'promoProducts'})\" class=\"alert-text text-3\" ng-bind-html=\"$root.translations.common.cartInvitation3\"></div>\n" +
+    "           \n" +
     "        </div>\n" +
     "        <div ng-if=\"navigationCartVm.regularProductsLength > 2\" class=\"alert-cta\">\n" +
     "            <button ng-click=\"navigationCartVm.cartSrv.displayCart()\" class=\"button-2\" ng-bind-html=\"$root.translations.common.cartButton2\"></button>\n" +
@@ -148,7 +144,7 @@ angular.module("../dev/app/modules/navigationCart/navigationCart.tpl.html", []).
     "</div>");
 }]);
 
-angular.module("../dev/app/modules/product/product.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("../dev/app/modules/product/product.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../dev/app/modules/product/product.tpl.html",
     "<div id=\"products\" class=\"products-details\">\n" +
     "    <article id=\"product-display-{{::product.sku}}\" class=\"product product-idx-{{$index + 1}} product-{{::product.skuIndex + 1}} product-category-{{::product.categoryId}}\"\n" +
@@ -180,9 +176,7 @@ angular.module("../dev/app/modules/product/product.tpl.html", []).run(["$templat
     "                    </div>\n" +
     "                    <div ng-if=\"::!product.isOutOfStock\">\n" +
     "                        <div class=\"quantity\">\n" +
-    "\n" +
     "                            <div quantity-select max=\"100\" ng-model=\"product.quantity\"></div>\n" +
-    "\n" +
     "                        </div>\n" +
     "\n" +
     "                        <button class=\"add-to-cart\" ng-if=\"!product.isPromo || (product.isPromo && mainVm.canBuyPromoProducts)\" ng-click=\"productVm.cartSrv.addProduct(product)\"\n" +
@@ -201,10 +195,18 @@ angular.module("../dev/app/modules/product/product.tpl.html", []).run(["$templat
     "\n" +
     "\n" +
     "                    </div>\n" +
+    "                    \n" +
+    "                    <div class=\"product-soldout-notification mobile-only\" ng-if=\"::product.isOutOfStock\">\n" +
+    "                        <div class=\"button\" ng-bind=\"$root.translations.common.soldOutLabel\">\n" +
+    "\n" +
+    "                        </div>\n" +
+    "                        <p class=\"description\" ng-bind=\"$root.translations.common.soldOutPresale\" ng-if=\"::product.isOutOfStock && product.isInPresales\"></p>\n" +
+    "                    </div>\n" +
+    "\n" +
     "                </div>\n" +
     "\n" +
-    "            </div>\n" +
     "\n" +
+    "            </div>\n" +
     "            <perfect-scrollbar class=\"product-description\" ng-bind-html=\"::product.shortDescription\"></perfect-scrollbar>\n" +
     "\n" +
     "            <div class=\"product-links\">\n" +
@@ -261,7 +263,7 @@ angular.module("../dev/app/modules/product/product.tpl.html", []).run(["$templat
     "\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"product-soldout-notification\" ng-if=\"::product.isOutOfStock\">\n" +
+    "            <div class=\"product-soldout-notification regular-only\" ng-if=\"::product.isOutOfStock\">\n" +
     "                <div class=\"button\" ng-bind=\"$root.translations.common.soldOutLabel\">\n" +
     "\n" +
     "                </div>\n" +
@@ -301,7 +303,7 @@ angular.module("../dev/app/modules/product/product.tpl.html", []).run(["$templat
     "</div>");
 }]);
 
-angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../dev/app/modules/products/products.tpl.html",
     "<div id=\"products\" class=\"overview {{productsVm.activeCategory}}\" ng-class=\"{promo: product.selected}\" ng-animate-children=true>\n" +
     "    <div class=\"slide-category slide-{{::category.key}}\" ng-repeat=\"category in productsVm.categories\">\n" +
@@ -338,7 +340,7 @@ angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templ
     "\n" +
     "                <div class=\"mobile-only product-action\">\n" +
     "                    <div class=\"quantity\">\n" +
-    "                        <div quantity-select max=\"100\" ng-model=\"product.quantity\"></div>\n" +
+    "                        <div quantity-select max=\"100\" ng-model=\"product.quantity\" ng-if=\"!product.isOutOfStock\"></div>\n" +
     "                    </div>\n" +
     "                    <a class=\"add-to-cart\" ng-click=\"productsVm.cartSrv.addProduct(product)\" ng-bind=\"$root.translations.common.addToCart\" ng-if=\"!product.isOutOfStock && !product.isInPresales\"></a>\n" +
     "                    <div ng-if=\"!product.isOutOfStock && product.isInPresales\">\n" +
@@ -346,7 +348,9 @@ angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templ
     "                            ng-bind=\"$root.translations.common.quickBuy\"></button>\n" +
     "                        <button class=\"quick-buy\" ng-if=\"product.quickBuyToolTipOpened\" ng-click=\"productsVm.cartSrv.addAndCheckout(product)\" ng-bind=\"$root.translations.common.checkoutHomeMobile\"></button>\n" +
     "                        <div class=\"quick-buy-tooltip\" ng-if=\"product.quickBuyToolTipOpened\" ng-bind=\"$root.translations.common.quickBuyToolTip\"></div>\n" +
+    "                        \n" +
     "                    </div>\n" +
+    "                    <a class=\"add-to-cart\" ng-click=\"productsVm.goToProduct(product)\" ng-bind=\"$root.translations.common.viewProduct\" ng-if=\"product.isOutOfStock \"></a>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
@@ -385,7 +389,7 @@ angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templ
     "</div>");
 }]);
 
-angular.module("../dev/app/modules/shoppingCart/shoppingCart.tpl.html", []).run(["$templateCache", function ($templateCache) {
+angular.module("../dev/app/modules/shoppingCart/shoppingCart.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../dev/app/modules/shoppingCart/shoppingCart.tpl.html",
     "<!-- HEADER -->\n" +
     "<header id=\"main-header\">\n" +
