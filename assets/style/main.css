@@ -2083,11 +2083,12 @@ body {
         width: 100%;
         height: auto;
     }
+    
+    /*
     #products.overview .product:hover .product-image img {
         transform: none;
         width: 91px;
     }
-    /*
     #products .product.product-1 .product-display {
         width: 55px;
         height: 145px;
@@ -3708,36 +3709,12 @@ body {
 }
 
 #mobile-infos .button-3:after  {
-        background-image: -ms-linear-gradient(left, #ffd12a 30%, #e2a803 90%);
-        background-image: -moz-linear-gradient(left, #ffd12a 30%, #e2a803 90%);
-        background-image: -o-linear-gradient(left, #ffd12a 30%, #e2a803 90%);
-        background-image: -webkit-linear-gradient(left, #ffd12a 30%, #e2a803 90%);
-        background-image: linear-gradient(to right, #ffd12a 30%, #e2a803 90%);
+    background: #a4e9ff;
+    background: -moz-linear-gradient(left, #a4e9ff 0%, #1baee7 100%);
+    background: -webkit-linear-gradient(left, #a4e9ff 0%, #1baee7 100%);
+    background: linear-gradient(to right, #a4e9ff 0%, #1baee7 100%);
     }
-    .module-2 #mobile-infos .button-3:after  {
-        background-image: -ms-linear-gradient(left, #ff8575 30%, #dd4b43 90%);
-        background-image: -moz-linear-gradient(left, #ff8575 30%, #dd4b43 90%);
-        background-image: -o-linear-gradient(left, #ff8575 30%, #dd4b43 90%);
-        background-image: -webkit-linear-gradient(left, #ff8575 30%, #dd4b43 90%);
-        background-image: linear-gradient(to right, #ff8575 30%, #dd4b43 90%);
-
-    }
-    .module-3 #mobile-infos .button-3:after  {
-        background-image: -ms-linear-gradient(left, #3dceff 30%, #1991c4 90%);
-        background-image: -moz-linear-gradient(left, #3dceff 30%, #1991c4 90%);
-        background-image: -o-linear-gradient(left, #3dceff 30%, #1991c4 90%);
-        background-image: -webkit-linear-gradient(left, #3dceff 30%, #1991c4 90%);
-        background-image: linear-gradient(to right, #3dceff 30%, #1991c4 90%);
-    }
-    .module-4 #mobile-infos .button-3:after  {
-        background-image: -ms-linear-gradient(left, #88de35 30%, #679B2F 100%);
-        background-image: -moz-linear-gradient(left, #88de35 30%, #679B2F 100%);
-        background-image: -o-linear-gradient(left, #88de35 30%, #679B2F 100%);
-        background-image: -webkit-linear-gradient(left, #88de35 30%, #679B2F 100%);
-        background-image: linear-gradient(to right, #88de35 30% #679B2F 100%);
     
-    }
-
 #mobile-infos.level-0 .button-3:after {
     width: 0%;
 }

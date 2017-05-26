@@ -595,10 +595,8 @@ function productsController($scope, productService, $stateParams, ROUTING_SHOP_S
 
     productsVm.goToCategory = function (category) {
         //productsVm.products = [];
-        product = productService.getProductForCategory(category)[0];
-        $state.go('app.shop.category.product', {
-            productId: product.sku,
-            categoryId: product.categoryId
+        $state.go('app.shop.category', {
+            categoryId: category
         });
     }
 
