@@ -216,7 +216,15 @@ angular.module("../dev/app/modules/product/product.tpl.html", []).run(["$templat
     "\n" +
     "            <div class=\"product-long-description\" ng-class=\"{'show': productVm.showLongDecription}\">\n" +
     "                <span class=\"close-btn\" ng-click=\"productVm.displayLongDecription();\"></span>\n" +
-    "                <perfect-scrollbar class=\"regular-only description-content\" ng-bind-html=\"product.longDescription\"></perfect-scrollbar>\n" +
+    "                <perfect-scrollbar class=\"regular-only description-content\">\n" +
+    "                    <div ng-bind-html=\"product.longDescription\"></div>\n" +
+    "                    <p>&nbsp;</p>\n" +
+    "                    <div class=\"parsys\"><p class=\"label parbase section text\"><strong ng-bind=\"$root.translations.common.usageLabel\"></strong></p></div>\n" +
+    "                    <div ng-bind-html=\"product.usage\"></div>\n" +
+    "                    <p>&nbsp;</p>\n" +
+    "                    <div class=\"parsys\"><p class=\"label parbase section text\"><strong ng-bind=\"$root.translations.common.ingredientsLabel\"></strong></p></div>\n" +
+    "                    <div ng-bind-html=\"product.ingredients\"></div>\n" +
+    "                </perfect-scrollbar>\n" +
     "            </div>\n" +
     "            <div class=\"mobile-only mobile-long-description\" ng-bind-html=\"product.longDescription\"></div>\n" +
     "            <div class=\"mobile-only mobile-usage\" ng-class=\"{'show': productVm.showUsage}\">\n" +
