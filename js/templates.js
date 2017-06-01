@@ -24,7 +24,6 @@ angular.module("../dev/app/modules/category/category.tpl.html", []).run(["$templ
     "                <div class=\"links\" ng-if=\"product.menuOpened\">\n" +
     "\n" +
     "                    <a ng-click=\"categoryVm.cartSrv.addProduct(product)\" ng-bind=\"$root.translations.common.addToCart\" ng-if=\"product.menuOpened && !product.isOutOfStock && (!product.isPromo || mainVm.canBuyPromoProducts)\"></a>\n" +
-    "                    <a ng-click=\"product.menuOpened = false; categoryVm.goToProduct(product);\" ng-bind=\"$root.translations.common.viewProduct\" ng-if=\"product.menuOpened  && !product.isOutOfStock\"></a>\n" +
     "                    <a ng-click=\"product.menuOpened = false; categoryVm.goToProduct(product);\" ng-bind=\"$root.translations.common.viewProductOutOfStock\" ng-if=\"product.menuOpened  && product.isOutOfStock\"></a>\n" +
     "\n" +
     "\n" +
@@ -316,7 +315,7 @@ angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templ
     "<div id=\"products\" class=\"overview {{productsVm.activeCategory}}\" ng-class=\"{promo: product.selected}\" ng-animate-children=true>\n" +
     "    <div class=\"slide-category slide-{{::category.key}}\" ng-repeat=\"category in productsVm.categories\">\n" +
     "\n" +
-    "        <h3 class=\"mobile-only\" ng-bind-html=\"category.name\" ng-click=\"productsVm.goToCategory(category.key);\"></h3>\n" +
+    "        <h3 class=\"mobile-only\" ng-bind-html=\"category.mobileName\" ng-click=\"productsVm.goToCategory(category.key);\"></h3>\n" +
     "\n" +
     "        <article id=\"product-display-{{::product.sku}}\" class=\"product product-{{($parent.$index * 3) + ($index+1)}} product-{{::product.categoryId}}\"\n" +
     "            ng-repeat=\"product in productsVm.products | filter : {categoryId:category.key}\" ng-mouseenter=\"productsVm.setActiveCategory(product.categoryId);\"\n" +
@@ -497,8 +496,8 @@ angular.module("../dev/app/modules/shoppingCart/shoppingCart.tpl.html", []).run(
     "                            <td>\n" +
     "                                <div class=\"quantity\">\n" +
     "\n" +
-    "                                    <!--<div quantity-select max=\"100\" ng-model=\"product.quantity\" ng-change=\"shoppingCartVm.shoppingCartUpdated();\"></div>-->\n" +
-    "                                    <ds-selector options=\"[1,2,3,4,5,6]\" selected-option=\"product.quantity\"></ds-selector>\n" +
+    "                                    <!--<div quantity-select max=\"100\" ng-model=\"product.quantity\" ng-change=\"shoppingCartVm.shoppingCartUpdated();\"></div>-->      \n" +
+    "                                    <div quantity-select max=\"100\" ng-model=\"product.quantity\" ng-change=\"shoppingCartVm.shoppingCartUpdated();\"></div>\n" +
     "                                            \n" +
     "                                </div>\n" +
     "                                <button class=\"remove-button\" ng-click=\"shoppingCartVm.cartSrv.removeProduct(product)\" ng-bind=\"$root.translations.common.remove\"></button>\n" +

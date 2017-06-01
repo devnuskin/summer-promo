@@ -736,7 +736,8 @@ function categoryService(categoryModel, PROMO_PRODUCTS_KEY) {
             category.name,
             category.title,
             category.description,
-            category.video
+            category.video,
+            category.mobileName
             );
     }
 
@@ -1325,10 +1326,11 @@ angular
 function categoryModel(IMAGES_URL) {
     var api = {};
 
-    function Category(key, name, title, description, video) {
+    function Category(key, name, title, description, video, mobileName) {
         var category = {
             key: key,
             name: name,
+            mobileName: mobileName,
             title: title,
             video: video,
             description: description
@@ -1337,8 +1339,8 @@ function categoryModel(IMAGES_URL) {
         return category;
     }
 
-    api.convertTo = function (key, name, title, description, video) {
-        return new Category(key, name, title, description, video)
+    api.convertTo = function (key, name, title, description, video, mobileName) {
+        return new Category(key, name, title, description, video, mobileName)
     }
 
     return api;
@@ -1579,6 +1581,7 @@ function quantitySelectDirective() {
             var select2Options = {
                 data: availableOptions,
                 tags: true,
+                width: '',
 
                 //Allow manually entered text in drop down.
                 createSearchChoice: function (term, data) {

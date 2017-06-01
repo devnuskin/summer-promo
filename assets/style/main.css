@@ -240,7 +240,7 @@ body {
     left: 50%;
     bottom: 400px;
     width: 30%;
-    min-width: 400px;
+    min-width: 430px;
     margin-top: -15px;
 }
 
@@ -334,7 +334,7 @@ body {
     left: 0;
     bottom: 0;
     right: 0;
-    background: url(/content/dam/eu-images/summerpromo2016/branded-items-1.png) left 20px no-repeat;
+    background: url(/content/dam/eu-images/summerpromo2016/branded-items-1.png) center 10px no-repeat;
     border-radius: 50%;
     text-align: center;
     padding: 106px 30px 10px 30px;
@@ -1506,7 +1506,7 @@ body {
 .product .presale-infos {
     position: absolute;
     z-index: 10;
-    bottom: 80px;
+    bottom: 50px;
     right: 100%;
     width: 240px;
     text-align: right;
@@ -1518,7 +1518,7 @@ body {
     text-transform: uppercase;
     padding-right: 16px;
     background: url(/content/dam/eu-images/summerpromo2016/arrow-left-2.png) right 3px no-repeat;
-    width: 220px;
+    width: 240px;
     text-align: right;
 }
 
@@ -2017,7 +2017,7 @@ body {
     background-image: url(/content/dam/eu-images/summerpromo2016/stands/module-1/stand-9-shadow.png);
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
     .product .presale-infos {
         top: 0;
         bottom: auto;
@@ -2215,7 +2215,7 @@ body {
     */
     #products.overview .slide-category {
         margin-top: 30px;
-        margin-bottom: 90px;
+        margin-bottom: 60px;
     }
     #products.overview .slide-category>h3 {
         position: relative;
@@ -2226,14 +2226,9 @@ body {
         font-weight: normal;
         text-shadow: 0 1px 5px rgba(0, 0, 0, 0.43);
         cursor: pointer;
+        font-size: 25px;
     }
-    #products.overview .slide-category>h3 small {
-        font-size: 15px;
-        display: none;
-    }
-    #products.overview .slide-category>h3 div {
-        font-size: 35px;
-    }
+    
     #products.overview .slick-arrow {
         border: none;
         padding: 0;
@@ -3158,13 +3153,14 @@ body {
         background-color: #000;
         color: #fff;
         font-size: 12px;
-        padding: 10px;
-        min-height: 0;
+        /*padding: 10px;
+        min-height: 0;*/
     }
     #products .quick-buy {
         background-color: #fff;
         color: #000;
     }
+    /*
     #products.overview .quick-buy-wrapper {
         margin: 0;
         position: relative;
@@ -3191,6 +3187,7 @@ body {
     #products.overview .quick-buy-tooltip {
         display: none;
     }
+    */
 }
 
 
@@ -3370,13 +3367,16 @@ body {
     width: 50px;
 }
 
-.quantity .select2-container--default {}
+.quantity .select2-container--default {
+    width: 100%;
+
+}
 
 .quantity .select2-container--default .select2-selection--single {
-    background-color: #fff;
+    background-color: transparent;
     border-radius: 0;
     height: 42px;
-    border: 1px solid #d6d6d6;
+    border: 1px solid #000;
 }
 
 .quantity .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -3389,7 +3389,9 @@ body {
 .quantity .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 42px;
 }
-
+.quantity .select2-container--default .select2-selection--single .select2-selection__arrow b{
+    border-color: #000 transparent transparent transparent;
+}
 
 /***
  * Ritual page
@@ -3526,7 +3528,7 @@ body {
 #rituals .product .presale-infos {
     position: absolute;
     top: auto;
-    bottom: 95%;
+    bottom: 99%;
     margin-bottom: -15px;
     right: 50%;
     transform: translateX(50%);
@@ -4281,7 +4283,9 @@ div#logo .desktopLogo {
     }
     #main-view #products.products-details .quantity {
         margin-bottom: 0;
+        /*
         margin-top: 10px;
+        */
     }
 }
 
