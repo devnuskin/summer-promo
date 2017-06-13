@@ -350,13 +350,10 @@
                                 <div class="logo-wrapper regular-only">
                                     <a ui-sref="app.shop({showCase: 'normal'})" class="logo"><img src="assets/img/nuskin-logo.png" alt="Nu Skin : Discover the best you"></a>
                                 </div>
-                                <button id="back-button" ui-sref="app.shop({showCase: 'normal'})" ng-class="{'hide': mainVm.$state.current.name == 'app.shop' && mainVm.$stateParams.showCase == '{{::mainVm.ROUTING_SHOP_STATE.normal}}'}" ng-bind="$root.translations.common.goBack"></button>
-                                <!-- ng-click="mainVm.goBack()" -->
+                                <button id="back-button" ng-class="{'hide': mainVm.$state.current.name == 'app.shop' && mainVm.$stateParams.showCase == '{{::mainVm.ROUTING_SHOP_STATE.normal}}'}" ng-bind="$root.translations.common.goBack" ng-click="mainVm.goBack()"></button>
+                                <!-- ui-sref="app.shop({showCase: 'normal'})" -->
 
-                                <div id="promo-button-wrapper">
-                                    
-                                    
-                                                                        
+                                <div id="promo-button-wrapper">         
                                     <a id="promo-button" class="radial-progress" data-progress="33" ui-sref="app.shop.category({showCase: 'promo', categoryId:'promoProducts'})" ng-class="{'hide': mainVm.$stateParams.showCase == '{{::mainVm.ROUTING_SHOP_STATE.promo}}', 'disabled': !mainVm.canBuyPromoProducts, 'level-0' : mainVm.regularProductsLength == 0, 'level-1' : mainVm.regularProductsLength == 1, 'level-2' : mainVm.regularProductsLength == 2}">
                                         <div class="circle">
                                             <div class="mask full">

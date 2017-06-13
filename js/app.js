@@ -258,7 +258,7 @@ function MainCtrl($state, categoryService, $window, $stateParams,
 
     //local function
     mainVm.goBack = function () {
-        //$window.history.back();
+        $window.history.back();
     }
     mainVm.ROUTING_SHOP_STATE = ROUTING_SHOP_STATE;
     mainVm.$state = $state;
@@ -342,7 +342,7 @@ function MainCtrl($state, categoryService, $window, $stateParams,
 
 angular
     .module('module.main')
-    .controller('mainController', MainCtrl);
+    .controller('mainController', MainCtrl)
 function navigationCartController(shoppingCartService, $rootScope, EVENT_NAMES, DEFAULT_IMAGE_URL, $state) {
 
     var navigationCartVm = {
@@ -713,6 +713,18 @@ function shoppingCartController(shoppingCartService, $rootScope,
     shoppingCartVm.regularProductsLength = shoppingCartService.getTotalRegularProduct();
 
 
+    
+    
+    $('#shopping-cart').on('scroll.select2', function() {
+        //$(".product-quantity").select2('positionDropdown');
+
+        $(".product-quantity").each(function(i, el){
+            if($(el).select2('isOpen')){
+                $(el).select2('close');
+            }
+            //if($(el).select2('isOpen'))
+        });
+    });
     
 
 
@@ -1577,12 +1589,11 @@ function quantitySelectDirective() {
             for (var i = 1; i <= N; i++) {
                 availableOptions.push(i);
             }
-
+            
             var select2Options = {
                 data: availableOptions,
                 tags: true,
-                width: '',
-
+                width: '',        
                 //Allow manually entered text in drop down.
                 createSearchChoice: function (term, data) {
                     if ($(data).filter(function () {
@@ -1606,7 +1617,7 @@ function quantitySelectDirective() {
 
 
             elem.select2(select2Options);
-
+            
         }
     };
 }

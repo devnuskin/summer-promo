@@ -24,7 +24,7 @@ angular.module("../dev/app/modules/category/category.tpl.html", []).run(["$templ
     "                <div class=\"links\" ng-if=\"product.menuOpened\">\n" +
     "\n" +
     "                    <a ng-click=\"categoryVm.cartSrv.addProduct(product)\" ng-bind=\"$root.translations.common.addToCart\" ng-if=\"product.menuOpened && !product.isOutOfStock && (!product.isPromo || mainVm.canBuyPromoProducts)\"></a>\n" +
-    "                    <a ng-click=\"product.menuOpened = false; categoryVm.goToProduct(product);\" ng-bind=\"$root.translations.common.viewProductOutOfStock\" ng-if=\"product.menuOpened  && product.isOutOfStock\"></a>\n" +
+    "                    <a ng-click=\"product.menuOpened = false; categoryVm.goToProduct(product);\" ng-bind=\"$root.translations.common.viewProductOutOfStock\" ng-if=\"product.menuOpened  && product.isOutOfStock\" class=\"viewProduct\"></a>\n" +
     "\n" +
     "\n" +
     "                </div>\n" +
@@ -297,9 +297,9 @@ angular.module("../dev/app/modules/product/product.tpl.html", []).run(["$templat
     "\n" +
     "            <a ng-click=\"productVm.cartSrv.addProduct(product)\" ng-bind=\"$root.translations.common.addToCart\" ng-if=\"product.menuOpened && !product.isOutOfStock && (!product.isPromo || mainVm.canBuyPromoProducts)\"></a>\n" +
     "            <a ng-click=\"product.menuOpened = false; productVm.goToProduct(product)\" ng-bind=\"$root.translations.common.viewProduct\"\n" +
-    "                ng-if=\"product.menuOpened && !product.isOutOfStock \"></a>\n" +
+    "                ng-if=\"product.menuOpened && !product.isOutOfStock \" class=\"viewProduct\"></a>\n" +
     "            <a ng-click=\"product.menuOpened = false; productVm.goToProduct(product)\" ng-bind=\"$root.translations.common.viewProductOutOfStock\"\n" +
-    "                ng-if=\"product.menuOpened && product.isOutOfStock \"></a>\n" +
+    "                ng-if=\"product.menuOpened && product.isOutOfStock \" class=\"viewProduct\"></a>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
