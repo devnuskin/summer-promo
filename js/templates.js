@@ -374,7 +374,7 @@ angular.module("../dev/app/modules/products/products.tpl.html", []).run(["$templ
     "        products-repeat-directive>\n" +
     "        <div class=\"links\" ng-if=\"product.menuOpened\">\n" +
     "\n" +
-    "            <div class=\"quick-buy-wrapper tablets-only\" ng-if=\"product.isInPresales  && !product.isOutOfStock\">\n" +
+    "            <div class=\"quick-buy-wrapper mobile-only\" ng-if=\"product.isInPresales  && !product.isOutOfStock\">\n" +
     "                <button class=\"quick-buy\" ng-click=\"product.quickBuyToolTipOpened = true; $event.stopPropagation();\" ng-bind=\"$root.translations.common.quickBuy\"></button>\n" +
     "                <div class=\"quick-buy-tooltip\" ng-bind=\"$root.translations.common.quickBuyToolTip\"></div>\n" +
     "                <div class=\"actions clearfix\" ng-if=\"product.quickBuyToolTipOpened\">\n" +

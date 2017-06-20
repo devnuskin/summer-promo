@@ -1432,11 +1432,6 @@ body {
     cursor: pointer;
 }
 
-#products.overview .product:hover .product-image img {
-    transform: translate(-50%, 0);
-    width: 130px;
-}
-
 #products .product .product-display {
     display: block;
     position: relative;
@@ -2017,6 +2012,13 @@ body {
     background-image: url(/content/dam/eu-images/summerpromo2016/stands/module-1/stand-9-shadow.png);
 }
 
+
+@media (min-width: 768px) {
+    #products.overview .product:hover .product-image img {
+        transform: translate(-50%, 0);
+        width: 130px;
+    }
+}
 @media (max-width: 767px) {
     .product .presale-infos {
         top: 0;
@@ -2084,11 +2086,12 @@ body {
         height: auto;
     }
     
-
+    /*
     #products.overview .product:hover .product-image img {
         transform: none;
         width: 100%;
     }
+    */
     /*
     #products.overview .product:hover .product-image img {
         transform: none;
@@ -2428,9 +2431,6 @@ body {
     #products.overview .product-menu.presale .links:before {
         border-bottom-color: #fff;
     }
-    #products.overview>.product-menu {
-        display: none;
-    }
 }
 
 @media (max-width: 767px) {
@@ -2444,6 +2444,9 @@ body {
     #products.overview {
         max-width: 325px;
         margin-top: 140px;
+    }
+    #products.overview>.product-menu {
+        display: none;
     }
     #products.overview .product-menu {
         bottom: auto !important;
