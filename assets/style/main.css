@@ -244,6 +244,12 @@ body {
     margin-top: -15px;
 }
 
+@media (max-width: 860px) {
+    #promo-button-wrapper {
+        bottom: 460px;
+        min-width: 383px;
+    }
+}
 @media (max-width: 767px) {
     #promo-button-wrapper {
         display: none;
@@ -258,6 +264,7 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     cursor: pointer;
+    overflow: hidden;
 }
 
 #promo-button.disabled {
@@ -464,6 +471,16 @@ body {
     font-size: 8px;
 }
 
+@media (max-width: 860px) {
+    #discount-badges {
+        bottom: 428px;
+        transform: translateX(139px);
+    }
+    #discount-badges .badge.shipping{
+        margin-left: 39px;
+        margin-top: -16px;
+    }
+}
 @media (max-width: 767px) {
     #discount-badges {
         bottom: auto;
@@ -1348,7 +1365,7 @@ body {
 }
 
 #site-title div {
-    font-size: 95px;
+    font-size: 65px;
     line-height: 1;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -1356,11 +1373,16 @@ body {
     text-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 }
 
+[class^='en_'] #site-title div{
+    font-size: 95px;
+}
+
 @media (max-width: 1023px) {
     #site-title {
         top: auto;
         bottom: 530px;
     }
+    [class^='en_'] #site-title div,
     #site-title div {
         font-size: 50px;
         margin: 0 auto;
@@ -2019,6 +2041,12 @@ body {
         width: 130px;
     }
 }
+@media (max-width: 768px) {
+    .product .presale-label {
+        width: 140px;
+        margin-left: auto;
+    }
+}
 @media (max-width: 767px) {
     .product .presale-infos {
         top: 0;
@@ -2428,12 +2456,12 @@ body {
         left: 50%;
         margin-left: -5px;
     }
-    #products.overview .product-menu.presale .links:before {
-        border-bottom-color: #fff;
-    }
 }
 
 @media (max-width: 767px) {
+    #products.overview .product-menu.presale .links:before {
+        border-bottom-color: #fff;
+    }
     .product-menu:before {
         width: 22px;
         height: 22px;
